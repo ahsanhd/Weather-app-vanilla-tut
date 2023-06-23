@@ -1,0 +1,112 @@
+*,*::before,*::after {
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  background-color:hsl(200, 100%, 85%) ;
+  color: hsl(200, 100%, 10%);
+  font-family: sans-serif;
+  font-size: 62.5%;
+}
+.blurred{
+  filter: blur(3px);
+}
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header-left {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 5px solid hsl(200, 100%, 10%);
+  margin: 1rem;
+  padding: 1rem;
+
+}
+
+.weather-icon {
+  width: 5rem;
+  height: 5rem;
+}
+
+.weather-icon.large {
+  width: 10rem;
+  height: 10rem;
+}
+
+.weather-current-temp {
+font-size: 2.5rem;
+margin-left: 1.5rem;
+}
+
+.header-right {
+  width: 50%;
+  display: grid;
+  gap: .7rem;
+  grid-template-columns: repeat(3,auto);
+  grid-template-rows: repeat(2,auto);
+}
+.info-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-size: .75rem;
+  font-weight: bold;
+  color: hsl(200, 100%, 20%);
+  text-transform: uppercase;
+}
+.label-value {
+  font-size: .76rem;
+  font-weight: lighter;
+}
+
+.label-value-sub {
+  font-size: .6rem;
+}
+
+.day-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,7.5rem);
+  gap: .5rem;
+  padding: 1rem;
+  margin-top: .3rem;
+  justify-content: center;
+}
+.day-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid hsl(200, 100%, 10%);
+  padding: .76rem;
+  border-radius: .3rem;
+}
+.day-card-day {
+  font-size: 1rem;
+  color: hsl(200, 100%, 20%);
+}
+
+.hour-section {
+  width: 100%;
+  text-align: center;
+  border-spacing: 0;
+}
+
+.hour-row {
+  background-color: hsl(200, 100%, 75%);
+}
+
+.hour-row:nth-child(2n) {
+  background-color: hsl(200, 100%, 70%);
+}
+
+.hour-row > td {
+  padding: .5rem 1rem;
+}
