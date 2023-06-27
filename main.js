@@ -2,17 +2,30 @@ import "./style.css";
 import { getWeather } from "./weather";
 import { ICON_MAP } from "./iconMap";
 
-getWeather(45, 30, Intl.DateTimeFormat().resolvedOptions().timeZone)
-  .then(renderWeather)
-  .catch((e) => {
-    console.error(e);
-    alert("There was some issue getting weather details of your location");
-  });
+navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+
+function positionSuccess({ coords }) {
+  getWeather(
+    coords.latitude,
+    coords.longitude,
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+  )
+    .then(renderWeather)
+    .catch((e) => {
+      console.error(e);
+      alert("There was some issue getting weather details of your location");
+    });
+}
+
+function positionError() {
+  alert(" ma chudao bohat garmi hai ");
+}
 
 function renderWeather({ current, daily, hourly }) {
   renderCurrentWeather(current);
   renderDailyWeather(daily);
   renderHourlyWeather(hourly);
+  console.log(hourly);
   document.body.classList.remove("blurred");
 }
 
@@ -59,22 +72,28 @@ function renderDailyWeather(daily) {
   });
 }
 
-const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, { hour: "numeric" });
+const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, {
+  hour: "numeric",
+});
 
 const hourlySection = document.querySelector("[data-hour-section]");
 const hourRowTemplate = document.getElementById("hour-row-template");
 
 function renderHourlyWeather(hourly) {
   hourlySection.innerHTML = "";
-  console.log({ hourly });
+  // console.log({ hourly });
   hourly.forEach((hour) => {
     const element = hourRowTemplate.content.cloneNode(true);
-    setValue("temp", hour.maxTemp, { parent: element });
+    setValue("temp", hour.temp, { parent: element });
     setValue("day", DAY_FORMATTER.format(hour.timestamp), { parent: element });
-    setValue("date", HOUR_FORMATTER.format(hour.timestamp), {
+    setValue("time", HOUR_FORMATTER.format(hour.timestamp), {
       parent: element,
     });
     element.querySelector("[data-icon]").src = getIconUrl(hour.iconCode);
+
+    setValue("fl-temp", hour.feelsLike, { parent: element });
+    setValue("wind", hour.windSpeed, { parent: element });
+    setValue("precip", hour.precip, { parent: element });
     hourlySection.append(element);
   });
 }

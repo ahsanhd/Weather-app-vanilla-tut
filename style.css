@@ -7,7 +7,7 @@ body{
   background-color:hsl(200, 100%, 85%) ;
   color: hsl(200, 100%, 10%);
   font-family: sans-serif;
-  font-size: 62.5%;
+  font-size: 72.5%;
 }
 .blurred{
   filter: blur(3px);
@@ -97,6 +97,7 @@ margin-left: 1.5rem;
   width: 100%;
   text-align: center;
   border-spacing: 0;
+  font-size: 2rem;
 }
 
 .hour-row {
